@@ -16,10 +16,12 @@ body, html {
 
 h3{
   font-size: 20px;
+  color: #f2f2f2;
 }
 
 h4{
   font-size: 16px;
+  color: #f2f2f2;
 }
 
 .greeting {
@@ -29,6 +31,7 @@ h4{
 .title {
   font-size: 38px;
   color: #f2f2f2;
+  word-break: break-word;
 }
 
 .title input {
@@ -39,11 +42,10 @@ h4{
   font-family: inherit;
   color: inherit;
   outline: none;
+  max-width: 100%;
   width: 300px;
   padding: 0;
 }
-
-
 
 .logout-btn {
   background: #d60b4f;
@@ -53,6 +55,12 @@ h4{
   border-radius: 6px;
   cursor: pointer;
   margin-bottom: 24px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #b00940;
 }
 
 .options {
@@ -95,10 +103,12 @@ h4{
   width: 20px;
   height: 20px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1;
+  font-weight: bold;
 }
 
 .create-data {
@@ -111,7 +121,12 @@ h4{
 .create-data input[type="text"] {
   font-size: 16px;
   padding: 12px 16px;
-  height: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #666;
+  border-radius: 6px;
+  background: #1a1c2b;
+  color: #f5f5f5;
 }
 
 .add-playlist {
@@ -130,6 +145,7 @@ h4{
   border-radius: 6px;
   background: #1a1c2b;
   color: #f5f5f5;
+  font-size: 16px;
 }
 
 .playlist-input button {
@@ -139,6 +155,13 @@ h4{
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+
+.playlist-input button:hover {
+  background: #00a344;
 }
 
 .playlist-input button:disabled {
@@ -147,22 +170,24 @@ h4{
 }
 
 .form-group {
-  margin: 8px 0;
+  margin: 20px 0;
 }
 
 .status-select, .status-note-input {
-  width: 90%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #666;
   border-radius: 6px;
   background: #1a1c2b;
   color: #f5f5f5;
-  height: 45px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
 .rating-container {
   display: flex;
-  gap: 2px;
+  gap: 4px;
+  flex-wrap: wrap;
 }
 
 .star {
@@ -172,6 +197,7 @@ h4{
   color: #555;
   cursor: pointer;
   transition: color 0.2s;
+  padding: 4px;
 }
 
 .star.active {
@@ -191,6 +217,13 @@ input[type="submit"] {
   cursor: pointer;
   font-size: 16px;
   margin-top: 18px;
+  width: 100%;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+input[type="submit"]:hover {
+  background: #0097a7;
 }
 
 input[type="submit"]:disabled {
@@ -208,6 +241,7 @@ input[type="submit"]:disabled {
   margin-bottom: 20px;
   border-bottom: 2px solid #00bcd4;
   padding-bottom: 10px;
+  word-break: break-word;
 }
 
 .data-item {
@@ -226,15 +260,9 @@ input[type="submit"]:disabled {
   box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
 
-.data-item label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-right: 18px;
-}
-
 .data-content {
   flex: 1;
+  min-width: 0;
 }
 
 .data-text {
@@ -242,11 +270,13 @@ input[type="submit"]:disabled {
   font-weight: 500;
   color: #f0f0f0;
   margin-bottom: 10px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .data-meta {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -258,13 +288,13 @@ input[type="submit"]:disabled {
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .status-badge.status-pending {
   background: #928b04;
   color: #fffde7;
   border: 1px solid #fffde7;
-  
 }
 
 .status-badge.status-on-hold {
@@ -296,28 +326,32 @@ input[type="submit"]:disabled {
   text-transform: none;
   letter-spacing: normal;
   color: #e8e6e6;
+  word-break: break-word;
 }
 
 .rating {
   color: #ffeb3b;
   font-size: 14px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .actions {
   display: flex;
   gap: 10px;
   margin-left: 18px;
+  flex-shrink: 0;
 }
 
 .actions button {
-  padding: 6px 14px;
+  padding: 8px 16px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .edit {
@@ -343,6 +377,8 @@ input[type="submit"]:disabled {
   padding: 18px;
   background: #1a1c2b;
   border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .edit-input {
@@ -354,6 +390,7 @@ input[type="submit"]:disabled {
   margin-bottom: 18px;
   background: #2c2f48;
   color: #f5f5f5;
+  box-sizing: border-box;
 }
 
 .edit-meta {
@@ -373,20 +410,10 @@ input[type="submit"]:disabled {
   color: #f5f5f5;
 }
 
-.status-note-input {
-  flex: 1;
-  min-width: 100px;
-  padding: 10px;
-  border: 1px solid #555;
-  border-radius: 6px;
-  font-size: 14px;
-  background: #1a1c2b;
-  color: #f5f5f5;
-}
-
 .edit-rating {
   display: flex;
   gap: 2px;
+  flex-wrap: wrap;
 }
 
 .edit-rating .star {
@@ -396,7 +423,7 @@ input[type="submit"]:disabled {
   color: #666;
   cursor: pointer;
   transition: color 0.2s;
-  padding: 2px;
+  padding: 4px;
 }
 
 .edit-rating .star.active {
@@ -420,6 +447,7 @@ input[type="submit"]:disabled {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.3s;
 }
 
 .save:hover {
@@ -434,6 +462,7 @@ input[type="submit"]:disabled {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.3s;
 }
 
 .cancel:hover {
@@ -442,10 +471,440 @@ input[type="submit"]:disabled {
 
 .empty-state {
   text-align: center;
-  padding: 50px;
+  padding: 50px 20px;
   color: #bbb;
   font-style: italic;
   background: #1a1c2b;
   border-radius: 10px;
   border: 2px dashed #555;
+}
+
+/* ==================== MOBILE RESPONSIVE STYLES ==================== */
+
+/* Tablet and below (768px) */
+@media screen and (max-width: 768px) {
+  .app {
+    padding: 16px;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .title input {
+    width: 100%;
+    max-width: 250px;
+    font-size: 26px;
+  }
+
+  .greeting {
+    margin-bottom: 24px;
+  }
+
+  .logout-btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 16px;
+    min-height: 48px;
+    touch-action: manipulation;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .options {
+    gap: 10px;
+  }
+
+  .options label {
+    flex: 1 1 100%;
+    padding: 14px 12px;
+    min-height: 52px;
+    font-size: 15px;
+    touch-action: manipulation;
+  }
+
+  .delete-playlist {
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    top: -10px;
+    right: -10px;
+  }
+
+  .create-data {
+    padding: 16px;
+  }
+
+  .create-data input[type="text"] {
+    padding: 14px 12px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .add-playlist {
+    margin: 28px 0;
+  }
+
+  .playlist-input {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .playlist-input input {
+    padding: 14px 12px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .playlist-input button {
+    padding: 14px 18px;
+    font-size: 16px;
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .form-group {
+    margin: 16px 0;
+  }
+
+  .status-select,
+  .status-note-input {
+    padding: 14px 12px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .rating-container {
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .star {
+    font-size: 32px;
+    padding: 8px;
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  input[type="submit"] {
+    padding: 16px;
+    font-size: 17px;
+    min-height: 52px;
+  }
+
+  .data-list {
+    margin-top: 24px;
+  }
+
+  .data-list h3 {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .data-item {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .data-content {
+    width: 100%;
+  }
+
+  .data-text {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .data-meta {
+    gap: 10px;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 7px 12px;
+  }
+
+  .rating {
+    font-size: 13px;
+  }
+
+  .actions {
+    margin-left: 0;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .actions button {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 15px;
+    min-height: 48px;
+  }
+
+  .edit-form {
+    padding: 16px;
+  }
+
+  .edit-input {
+    padding: 14px 12px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .edit-meta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .edit-status {
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .status-note-input {
+    width: 100%;
+    padding: 14px 12px;
+  }
+
+  .edit-rating {
+    gap: 6px;
+    justify-content: flex-start;
+  }
+
+  .edit-rating .star {
+    font-size: 28px;
+    padding: 8px;
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  .edit-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .save,
+  .cancel {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .empty-state {
+    padding: 40px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Mobile phones (480px and below) */
+@media screen and (max-width: 480px) {
+  .app {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .title input {
+    width: 100%;
+    max-width: 200px;
+    font-size: 22px;
+  }
+
+  .greeting {
+    margin-bottom: 20px;
+  }
+
+  .logout-btn {
+    font-size: 15px;
+  }
+
+  h3 {
+    font-size: 17px;
+  }
+
+  h4 {
+    font-size: 14px;
+  }
+
+  .options label {
+    font-size: 14px;
+    padding: 12px 10px;
+  }
+
+  .create-data {
+    padding: 14px;
+  }
+
+  .add-playlist {
+    margin: 24px 0;
+  }
+
+  .data-list h3 {
+    font-size: 20px;
+  }
+
+  .data-text {
+    font-size: 16px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .rating {
+    font-size: 12px;
+  }
+
+  .star {
+    font-size: 28px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .edit-rating .star {
+    font-size: 24px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .actions button {
+    font-size: 14px;
+  }
+}
+
+/* Very small phones (360px and below) */
+@media screen and (max-width: 360px) {
+  .app {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .title input {
+    max-width: 180px;
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  h4 {
+    font-size: 13px;
+  }
+
+  .data-list h3 {
+    font-size: 18px;
+  }
+
+  .data-text {
+    font-size: 15px;
+  }
+
+  .star {
+    font-size: 26px;
+    min-width: 42px;
+    min-height: 42px;
+    padding: 6px;
+  }
+
+  .edit-rating .star {
+    font-size: 22px;
+    min-width: 42px;
+    min-height: 42px;
+  }
+}
+
+/* Touch device optimization */
+@media (hover: none) and (pointer: coarse) {
+  /* Improve touch targets */
+  button,
+  input[type="submit"],
+  .star,
+  .options label,
+  .delete-playlist {
+    -webkit-tap-highlight-color: rgba(0, 188, 212, 0.2);
+  }
+
+  /* Reduce scale effect on touch for better visual feedback */
+  .options label:active {
+    transform: scale(0.98);
+    transition: transform 0.1s;
+  }
+
+  button:active:not(:disabled),
+  input[type="submit"]:active:not(:disabled) {
+    transform: scale(0.97);
+    transition: transform 0.1s;
+  }
+
+  .star:active {
+    transform: scale(1.15);
+    transition: transform 0.1s;
+  }
+
+  /* Ensure all interactive elements have proper spacing */
+  .actions button {
+    margin: 0;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .app {
+    padding: 12px 20px;
+  }
+
+  .greeting {
+    margin-bottom: 16px;
+  }
+
+  .create-data {
+    padding: 14px;
+  }
+
+  .rating-container,
+  .edit-rating {
+    justify-content: flex-start;
+  }
+}
+
+/* Fix overflow issues on very small screens */
+@media screen and (max-width: 320px) {
+  .title input {
+    max-width: 150px;
+  }
+
+  .status-badge {
+    font-size: 9px;
+    padding: 5px 8px;
+  }
+
+  .star {
+    font-size: 24px;
+    min-width: 40px;
+    min-height: 40px;
+  }
 }

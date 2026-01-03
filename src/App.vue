@@ -251,7 +251,6 @@ const loadData = async () => {
     <div class="options">
       <label v-for="playlist in playlists" :key="playlist.id">
         <input type="radio" name="playlist" :value="playlist.id" v-model="input_playlist" />
-        <span :class="`bubble ${playlist.playlist_name.toLowerCase()}`"></span>
         <div>{{ playlist.playlist_name }}</div>
 
         <button
@@ -310,10 +309,6 @@ const loadData = async () => {
         <h3>{{ playlists.find(p => p.id === input_playlist)?.playlist_name || 'Unknown' }}</h3>
         <div v-for="item in filteredData" :key="item.id" :class="`data-item`">
           <template v-if="editingItem !== item">
-            <label>
-              <input type="checkbox" v-model="item.done" />
-              <span :class="`bubble ${item.playlist_name ? item.playlist_name.toLowerCase() : 'default'}`"></span>
-            </label>
             <div class="data-content">
               <div class="data-text">{{ item.item_name }}</div>
               <div class="data-meta">

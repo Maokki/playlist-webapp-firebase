@@ -277,4 +277,83 @@ h2 {
   font-size: 14px;
   font-family: 'Courier New', monospace;
 }
+
+/* Mobile responsive styles */
+@media screen and (max-width: 768px) {
+  .auth-form {
+    max-width: 100%;
+    margin: 40px 16px;
+    padding: 28px 24px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .toggle-btn {
+    padding: 14px 12px;
+    font-size: 15px;
+    min-height: 48px;
+  }
+
+  .form-input {
+    padding: 14px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .submit-btn {
+    padding: 16px;
+    font-size: 16px;
+    min-height: 52px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .auth-form {
+    margin: 30px 12px;
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .form-toggle {
+    margin-bottom: 20px;
+  }
+
+  .toggle-btn {
+    font-size: 14px;
+  }
+
+  .error-message {
+    font-size: 13px;
+    padding: 12px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .auth-form {
+    margin: 20px 10px;
+    padding: 20px 16px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
+
+/* Touch device optimization */
+@media (hover: none) and (pointer: coarse) {
+  .toggle-btn:active {
+    transform: scale(0.98);
+  }
+
+  .submit-btn:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
 </style>
