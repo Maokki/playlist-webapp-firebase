@@ -1,4 +1,4 @@
-// App.vue with Firebase/Firestore and Filtered Playlist View
+// App.vue
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
@@ -38,10 +38,16 @@ const input_rating = ref(0)
 const newPlaylist = ref('')
 
 const data_asc = computed(() => [...data.value].sort((a, b) => {
+  // pinned items always come first
+  if (a.isPinned && !b.isPinned) return -1
+  if (!a.isPinned && b.isPinned) return 1
+
+  // sort by date (newest first)
   const dateA = a.createdAt?.toDate ? a.createdAt.toDate() : new Date(a.createdAt)
   const dateB = b.createdAt?.toDate ? b.createdAt.toDate() : new Date(b.createdAt)
-  return dateA - dateB
+  return dateB - dateA
 }))
+// ===== END PIN FEATURE =====
 
 // Filtered data based on selected playlist
 const filteredData = computed(() => {
@@ -136,7 +142,8 @@ const addData = async () => {
       status: input_status.value,
       ratings: input_rating.value || null,
       status_Note: input_status_note.value.trim() || null,
-      playlist_id: input_playlist.value
+      playlist_id: input_playlist.value,
+      isPinned: false // new items are unpinned by default =====
     }
 
     const createdItem = await createItem(newItemData)
@@ -190,7 +197,8 @@ const saveEdit = async () => {
       status: editStatus.value,
       ratings: editRating.value || null,
       status_Note: editStatusNote.value.trim() || null,
-      playlist_id: editingItem.value.playlist_id
+      playlist_id: editingItem.value.playlist_id,
+      isPinned: editingItem.value.isPinned // preserve pin status
     }
     
     await updateItem(editingItem.value.id, updatedItemData)
@@ -209,6 +217,33 @@ const saveEdit = async () => {
     cancelEdit()
   } catch (error) {
     console.error('Failed to update item:', error)
+  }
+}
+
+// pin feature
+const togglePin = async (item) => {
+  try {
+    const updatedItemData = {
+      item_name: item.item_name,
+      status: item.status,
+      ratings: item.ratings,
+      status_Note: item.status_Note,
+      playlist_id: item.playlist_id,
+      isPinned: !item.isPinned // toggle the pin status
+    }
+    
+    await updateItem(item.id, updatedItemData)
+    
+    // Update local data
+    const index = data.value.findIndex(dataItem => dataItem.id === item.id)
+    if (index !== -1) {
+      data.value[index] = { 
+        ...data.value[index], 
+        isPinned: !item.isPinned 
+      }
+    }
+  } catch (error) {
+    console.error('Failed to toggle pin:', error)
   }
 }
 
@@ -307,7 +342,8 @@ const loadData = async () => {
     <section class="data-list">
       <div v-if="input_playlist">
         <h3>{{ playlists.find(p => p.id === input_playlist)?.playlist_name || 'Unknown' }}</h3>
-        <div v-for="item in filteredData" :key="item.id" :class="`data-item`">
+        <div v-for="item in filteredData" :key="item.id" :class="`data-item ${item.isPinned ? 'pinned' : ''}`">
+
           <template v-if="editingItem !== item">
             <div class="data-content">
               <div class="data-text">{{ item.item_name }}</div>
@@ -326,6 +362,8 @@ const loadData = async () => {
               <button class="delete" @click="removeData(item)">Delete</button>
             </div>
           </template>
+
+          <!-- edit form -->
           <template v-else>
             <div class="edit-form">
               <input type="text" v-model="editContent" class="edit-input" />
@@ -357,6 +395,14 @@ const loadData = async () => {
                 </div>
               </div>
               <div class="edit-actions">
+                <!-- pin button in edit mode -->
+                <button 
+                  @click="togglePin(item)" 
+                  class="pin"
+                  :title="item.isPinned ? 'Unpin item' : 'Pin item'"
+                >
+                  {{ item.isPinned ? '📌 Unpin' : '📍 Pin' }}
+                </button>
                 <button @click="saveEdit" class="save">Save</button>
                 <button @click="cancelEdit" class="cancel">Cancel</button>
               </div>
@@ -373,3 +419,26 @@ const loadData = async () => {
     </section>
   </main>
 </template>
+
+<style>
+.data-item.pinned {
+  border-left: 7px solid #8d1c08;
+}
+
+.edit-actions .pin {
+  background: #fbbf24;
+  color: #78350f;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.edit-actions .pin:hover {
+  background: #f59e0b;
+  transform: translateY(-1px);
+}
+</style>
